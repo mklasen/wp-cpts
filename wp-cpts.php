@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die( 'You can\'t access this file directly!');
  * Version: 1.0.2
  * Author: Marinus Klasen
  * Author URI: https://mklasen.com
- 
+ */
 	
 	/* **************************
 	#
