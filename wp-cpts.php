@@ -18,23 +18,23 @@ defined( 'ABSPATH' ) or die( 'You can\'t access this file directly!');
 	function register_post_type_cpt() {
 	
 		$labels = array(
-			'name'               => _x( 'CPT'),
-			'singular_name'      => _x( 'Cpt'),
-			'menu_name'          => _x( 'CPT'),
-			'name_admin_bar'     => _x( 'Cpt'),
-			'add_new'            => _x( 'Add Cpt'),
-			'add_new_item'       => __( 'Add New Cpt'),
-			'new_item'           => __( 'New Cpt'),
-			'edit_item'          => __( 'Edit Cpt'),
-			'view_item'          => __( 'View Cpt'),
-			'all_items'          => __( 'All Cpts'),
-			'search_items'       => __( 'Search Cpts'),
-			'parent_item_colon'  => __( 'Parent Cpt:'),
-			'not_found'          => __( 'No cpts found.'),
-			'not_found_in_trash' => __( 'No cpts found in Trash.'), 
+			'name'               => 'CPT',
+			'singular_name'      => 'Cpt',
+			'menu_name'          => 'CPT',
+			'name_admin_bar'     => 'Cpt',
+			'add_new'            => 'Add Cpt',
+			'add_new_item'       => 'Add New Cpt',
+			'new_item'           => 'New Cpt',
+			'edit_item'          => 'Edit Cpt',
+			'view_item'          => 'View Cpt',
+			'all_items'          => 'All Cpts',
+			'search_items'       => 'Search Cpts',
+			'parent_item_colon'  => 'Parent Cpt:',
+			'not_found'          => 'No cpts found.',
+			'not_found_in_trash' => 'No cpts found in Trash.', 
 		);
 	
-		$args = array(
+		$pArgs = array(
 			'labels'             => $labels,
 			'taxonomies' 		 => array('cpt-category'),
 			'public'             => true,
@@ -52,17 +52,19 @@ defined( 'ABSPATH' ) or die( 'You can\'t access this file directly!');
 		);
 	
     // Actually register post type with the arguments/parameters above
-		register_post_type( 'cpt', $args );
+		register_post_type( 'cpt', $pArgs );
+		
+		$cArgs = array(
+			'label' => 'Categories',
+			'rewrite' => array( 'slug' => 'category' ),
+			'hierarchical' => true,
+		);
 		
 		// Register a taxonomy/category for the custom post type
 		register_taxonomy(
 			'cpt-category',
 			'cpt',
-			array(
-				'label' => __( 'Categories' ),
-				'rewrite' => array( 'slug' => 'category' ),
-				'hierarchical' => true,
-			)
+			$cArgs
 		);
 	}
 	
@@ -166,7 +168,7 @@ defined( 'ABSPATH' ) or die( 'You can\'t access this file directly!');
 	
 			add_meta_box(
 				'mklasen_add_cpt_content',
-				__( 'Add CPT'),
+				'Add CPT'),
 				'mklasens_cpt_media_button_metabox_content',
 				$screen
 			);
@@ -283,7 +285,7 @@ defined( 'ABSPATH' ) or die( 'You can\'t access this file directly!');
 	    unset( $columns['author'] );
 	    unset( $columns['comments'] );
 	    unset( $columns['date'] );
-		$columns['cpt-categories'] = __( 'Categories', 'your_text_domain' );
+		$columns['cpt-categories'] = 'Categories', 'your_text_domain' );
 	
 	    return $columns;
 	}
